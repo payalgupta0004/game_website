@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Guessing Game - GameZone</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .guessing-game {
+            text-align: center;
+        }
+        .guess-input-container {
+            margin: 2rem 0;
+        }
+        .hint-button {
+            margin: 1rem;
+        }
+        .hint-text {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            color: var(--accent-color);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🎮 GameZone</h1>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../scoreboard.html" class="nav-link">Scoreboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">🎯 Image Guessing Game</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Round</div>
+                    <div class="stat-value" id="round">1</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timer">30</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area guessing-game">
+            <div id="loading" class="loading">Loading image</div>
+            <div id="error" class="error-message" style="display: none;"></div>
+            
+            <div id="gameContent" style="display: none;">
+                <img id="gameImage" class="game-image" alt="Guess what this is">
+                <div class="guess-input-container">
+                    <div class="input-group">
+                        <input type="text" id="guessInput" placeholder="What do you see in this image?" autocomplete="off">
+                    </div>
+                    <button class="btn btn-primary" id="submitGuess">Submit Guess</button>
+                    <button class="btn btn-secondary hint-button" id="hintBtn">Get Hint</button>
+                </div>
+                <div id="hintText" class="hint-text"></div>
+                <div id="feedback" class="feedback" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn btn-primary" id="nextImage">Next Image</button>
+            <button class="btn btn-secondary" id="restartBtn">Restart Game</button>
+            <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="guessing.js"></script>
+</body>
+</html>
+

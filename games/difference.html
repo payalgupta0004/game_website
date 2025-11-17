@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot the Difference - GameZone</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .difference-game {
+            text-align: center;
+        }
+        .differences-found {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+        .instructions {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--text-gray);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🎮 GameZone</h1>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../scoreboard.html" class="nav-link">Scoreboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">🔍 Spot the Difference</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Found</div>
+                    <div class="stat-value" id="found">0 / 5</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timer">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Score</div>
+                    <div class="stat-value" id="score">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area difference-game">
+            <div class="instructions">
+                <p>Click on the differences between the two images. Find all 5 differences to win!</p>
+            </div>
+            
+            <div id="loading" class="loading">Loading images</div>
+            <div id="error" class="error-message" style="display: none;"></div>
+            
+            <div id="gameContent" class="difference-container" style="display: none;">
+                <div class="difference-image-wrapper" id="image1Wrapper">
+                    <img id="image1" class="difference-image" alt="Image 1">
+                </div>
+                <div class="difference-image-wrapper" id="image2Wrapper">
+                    <img id="image2" class="difference-image" alt="Image 2">
+                </div>
+            </div>
+            
+            <div id="gameComplete" style="display: none; text-align: center; padding: 2rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 1rem;">🎉 Well Done!</h2>
+                <p style="margin-bottom: 1rem;">You found all the differences!</p>
+                <div id="finalStats"></div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn btn-primary" id="restartBtn">New Game</button>
+            <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="difference.js"></script>
+</body>
+</html>
+

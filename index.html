@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Image-Powered Games!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🎮 GameZone</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="scoreboard.html" class="nav-link">Scoreboard</a></li>
+                <li><a href="#" class="nav-link" id="loginBtn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Play Image-Powered Games!</h1>
+                <p class="hero-subtitle">Challenge yourself with interactive games powered by real images from around the web</p>
+                <div class="hero-buttons">
+                    <a href="#games" class="btn btn-primary">Explore Games</a>
+                    <a href="scoreboard.html" class="btn btn-secondary">View Leaderboard</a>
+                </div>
+            </div>
+            <div class="hero-particles"></div>
+        </section>
+
+        <!-- Games Grid -->
+        <section id="games" class="games-section">
+            <h2 class="section-title">Available Games</h2>
+            <div class="games-grid">
+                <div class="game-card" data-game="guessing">
+                    <div class="game-icon">🎯</div>
+                    <h3>Image Guessing Game</h3>
+                    <p>Test your knowledge! Guess what's in the image.</p>
+                    <a href="games/guessing.html" class="btn btn-game">Play Now</a>
+                </div>
+                <div class="game-card" data-game="memory">
+                    <div class="game-icon">🧠</div>
+                    <h3>Memory Matching</h3>
+                    <p>Match pairs of images in this classic memory game.</p>
+                    <a href="games/memory.html" class="btn btn-game">Play Now</a>
+                </div>
+                <div class="game-card" data-game="difference">
+                    <div class="game-icon">🔍</div>
+                    <h3>Spot the Difference</h3>
+                    <p>Find the differences between two similar images.</p>
+                    <a href="games/difference.html" class="btn btn-game">Play Now</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 GameZone. Powered by Unsplash API.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="modal-note">Note: This is a placeholder. No backend authentication required.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

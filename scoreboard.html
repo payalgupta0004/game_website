@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard - GameZone</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .scoreboard-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .scoreboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-buttons button {
+            padding: 0.6rem 1.5rem;
+        }
+        .filter-buttons button.active {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+        .scores-table {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+            background: var(--bg-darker);
+            padding: 1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--card-border);
+        }
+        .score-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+            padding: 1rem;
+            border-bottom: 1px solid var(--card-border);
+            transition: background 0.3s ease;
+        }
+        .score-row:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+        .score-row:last-child {
+            border-bottom: none;
+        }
+        .no-scores {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+        .clear-scores {
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🎮 GameZone</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="scoreboard.html" class="nav-link active">Scoreboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="scoreboard-container">
+        <div class="scoreboard-header">
+            <h1 class="game-title">🏆 Scoreboard</h1>
+            <p style="color: var(--text-gray); margin-top: 1rem;">Track your gaming achievements</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="btn btn-secondary active" data-filter="all">All Games</button>
+            <button class="btn btn-secondary" data-filter="Image Guessing">Image Guessing</button>
+            <button class="btn btn-secondary" data-filter="Memory Matching">Memory Matching</button>
+            <button class="btn btn-secondary" data-filter="Spot the Difference">Spot the Difference</button>
+        </div>
+
+        <div class="scores-table">
+            <div class="table-header">
+                <div>#</div>
+                <div>Game</div>
+                <div>Score</div>
+                <div>Time</div>
+                <div>Date</div>
+            </div>
+            <div id="scoresList"></div>
+        </div>
+
+        <div class="clear-scores">
+            <button class="btn btn-secondary" id="clearScores">Clear All Scores</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter buttons
+            document.querySelectorAll('[data-filter]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.dataset.filter;
+                    displayScores();
+                });
+            });
+
+            // Clear scores button
+            document.getElementById('clearScores').addEventListener('click', function() {
+                if (confirm('Are you sure you want to clear all scores?')) {
+                    localStorage.removeItem('gameScores');
+                    displayScores();
+                    playSound('click');
+                }
+            });
+
+            displayScores();
+        });
+
+        function displayScores() {
+            const scoresList = document.getElementById('scoresList');
+            let scores = getScores();
+
+            // Filter scores
+            if (currentFilter !== 'all') {
+                scores = scores.filter(s => s.game === currentFilter);
+            }
+
+            // Sort by score (descending)
+            scores.sort((a, b) => b.score - a.score);
+
+            if (scores.length === 0) {
+                scoresList.innerHTML = '<div class="no-scores">No scores yet. Play some games to see your achievements here!</div>';
+                return;
+            }
+
+            scoresList.innerHTML = scores.map((score, index) => {
+                const date = new Date(score.date);
+                const formattedDate = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                return `
+                    <div class="score-row">
+                        <div>${index + 1}</div>
+                        <div>${score.game}</div>
+                        <div style="color: var(--primary-color); font-weight: bold;">${score.score}</div>
+                        <div>${score.time}s</div>
+                        <div style="color: var(--text-gray); font-size: 0.9rem;">${formattedDate}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
+

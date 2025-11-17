@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game - GameZone</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .memory-game {
+            text-align: center;
+        }
+        .difficulty-selector {
+            margin: 2rem 0;
+        }
+        .difficulty-selector button {
+            margin: 0 0.5rem;
+        }
+        .difficulty-selector button.active {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🎮 GameZone</h1>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../scoreboard.html" class="nav-link">Scoreboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="game-container">
+        <div class="game-header">
+            <h1 class="game-title">🧠 Memory Matching Game</h1>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <div class="stat-label">Moves</div>
+                    <div class="stat-value" id="moves">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Matches</div>
+                    <div class="stat-value" id="matches">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="timer">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-area memory-game">
+            <div class="difficulty-selector">
+                <span>Difficulty: </span>
+                <button class="btn btn-secondary active" data-difficulty="easy">Easy (4 pairs)</button>
+                <button class="btn btn-secondary" data-difficulty="medium">Medium (6 pairs)</button>
+                <button class="btn btn-secondary" data-difficulty="hard">Hard (8 pairs)</button>
+            </div>
+            
+            <div id="loading" class="loading">Loading images</div>
+            <div id="error" class="error-message" style="display: none;"></div>
+            <div id="memoryGrid" class="memory-grid" style="display: none;"></div>
+            <div id="gameComplete" style="display: none; text-align: center; padding: 2rem;">
+                <h2 style="color: var(--primary-color); margin-bottom: 1rem;">🎉 Congratulations!</h2>
+                <p style="margin-bottom: 1rem;">You completed the game!</p>
+                <div id="finalStats"></div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn btn-primary" id="restartBtn">New Game</button>
+            <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="../script.js"></script>
+    <script src="memory.js"></script>
+</body>
+</html>
+
